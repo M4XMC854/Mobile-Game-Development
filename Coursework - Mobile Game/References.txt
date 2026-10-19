@@ -16,9 +16,19 @@ Link - https://www.youtube.com/watch?v=CAqm09kQn6M&t=344s
 Name - Indieramus
 Useage - Assisted me in creating an expandable and collapsible UI object
 
+
+
 Cool Hip-Hop Loop:
 
 Link - https://pixabay.com/sound-effects/musical-cool-hip-hop-loop-275527/
 Name - SergeQuadrado
 Use Type - Free for use under the Pixabay Content License
 Useage - Used as a test background music
+
+
+
+Scrolling List tutorial:
+
+Link - https://www.youtube.com/watch?v=zbUVWnq9j20&t=100s
+Name - BMo Dev
+Useage - Assisted me in creating a scrollable UI list to contain upgrade buttons.
