@@ -5,8 +5,8 @@ using UnityEngine.UIElements;
 
 public class ExpandableShop : MonoBehaviour
 {
-    [SerializeField] GameObject Shop; // Reference to the Shop UI elements
-    [SerializeField] Vector2 StartingPos, EndPos; // Start and end position of the shop UI
+    [SerializeField] Vector2 StartingPos; // Start position of the shop UI
+    [SerializeField] Vector2 EndPos; // End position of the shop UI
     [SerializeField] AnimationCurve AnimationCurve; // Stores the UI animation curve
 
     RectTransform RectTransform; 
@@ -34,24 +34,24 @@ public class ExpandableShop : MonoBehaviour
         }
     }
 
-    private IEnumerator Open()
+    private IEnumerator Open() // Coroutine to animate the opening of the shop UI
     {
         float ElapsedTime = 0;
         while (ElapsedTime < EndTime)
         {
-            Shop.transform.position = Vector3.Lerp(StartingPos, EndPos, AnimationCurve.Evaluate(ElapsedTime));
+            RectTransform.anchoredPosition = Vector3.Lerp(StartingPos, EndPos, AnimationCurve.Evaluate(ElapsedTime));
             yield return new WaitForEndOfFrame();
             ElapsedTime += Time.deltaTime;
         }
         IsOpen = true;
     }
 
-    private IEnumerator Close()
+    private IEnumerator Close() // Coroutine to animate the closing of the shop UI
     {
         float ElapsedTime = 0;
         while (ElapsedTime < EndTime)
         {
-            Shop.transform.position = Vector3.Lerp(EndPos, StartingPos, AnimationCurve.Evaluate(ElapsedTime));
+            RectTransform.anchoredPosition = Vector3.Lerp(EndPos, StartingPos, AnimationCurve.Evaluate(ElapsedTime));
             yield return new WaitForEndOfFrame();
             ElapsedTime += Time.deltaTime;
         }
