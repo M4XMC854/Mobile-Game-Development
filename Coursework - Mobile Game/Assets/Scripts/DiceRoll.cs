@@ -1,6 +1,8 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class DiceRoll : MonoBehaviour
@@ -8,14 +10,14 @@ public class DiceRoll : MonoBehaviour
 
     public int[] Outcomes; // Array to hold the outcomes of the dice rolls
     public float RollSpeed = 2f; // Speed at which the dice rolls
-    private InputAction InteractAction; // Input action for interacting with the dice
     int DisplayNum; // Variable to hold the number to display
     int FinalNum; // Variable to hold the final number after rolling
     public TextMeshProUGUI DiceDisplay; // Reference to the GameObject that displays the dice number
     bool isRolling = false; // Flag to check if the dice is currently rolling
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private InputAction InteractAction; // Input action for interacting with the dice
+
+    void Awake()
     {
         InteractAction = InputSystem.actions.FindAction("Interact"); // Find the "Interact" action in the Input System
         if (InteractAction == null)
@@ -31,11 +33,20 @@ public class DiceRoll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InteractAction.WasPressedThisFrame() && !isRolling)
+        if (Touchscreen.current != null)
         {
-            StartCoroutine(RollDice()); // Call the RollDice method when the Interact action is pressed
+            int TouchID = Touchscreen.current.primaryTouch.touchId.ReadValue(); // Get the finger ID of the primary touch
+            if (EventSystem.current.IsPointerOverGameObject(TouchID)) // Check if the touch is over a UI element
+            {
+                return; // If it is, exit the Update method to prevent rolling the dice
+            }
+            if (InteractAction.WasPressedThisFrame() && !isRolling)
+            {
+                StartCoroutine(RollDice()); // Start the RollDice coroutine when the Interact action is pressed
+            }
         }
     }
+
 
     IEnumerator RollDice()
     {

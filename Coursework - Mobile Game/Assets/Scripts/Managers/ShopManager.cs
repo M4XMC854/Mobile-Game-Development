@@ -11,7 +11,7 @@ public class ExpandableShop : MonoBehaviour
     [SerializeField] GameObject Canvas; // Reference to the canvas of the shop UI
     float CanvasHeight; // Stores the height of the canvas
 
-    RectTransform RectTransform;
+    RectTransform RectTransform; 
     float EndTime;
     bool IsOpen = false; // Store the state of the UI
 

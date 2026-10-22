@@ -4367,7 +4367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5836,7 +5836,7 @@ GameObject:
   - component: {fileID: 1581065786}
   - component: {fileID: 1581065785}
   - component: {fileID: 1581065788}
-  m_Layer: 5
+  m_Layer: 3
   m_Name: SettingsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6007,6 +6007,7 @@ MonoBehaviour:
   HapticFeedback: {fileID: 2044285731}
   SwipeRoll: {fileID: 136867237}
   AudioMixer: {fileID: 24100000, guid: 78936af754f6fcd4d971a52ba3ece9df, type: 2}
+  DiceRollScript: {fileID: 1588811292}
 --- !u!114 &1588811292
 MonoBehaviour:
   m_ObjectHideFlags: 0

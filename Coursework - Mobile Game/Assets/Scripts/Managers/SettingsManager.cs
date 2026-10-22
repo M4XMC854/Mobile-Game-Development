@@ -15,6 +15,7 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] GameObject SwipeRoll; // Reference to the swipe to roll toggle
     bool SwipeRollEnabled; // Variable to store the state of swipe to roll
     [SerializeField] AudioMixer AudioMixer; // Reference to the audio mixer
+    [SerializeField] DiceRoll DiceRollScript; // Reference to the DiceRoll script
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,12 +34,14 @@ public class SettingsManager : MonoBehaviour
     {
         SettingsUI.SetActive(true); // Displays the settings UI Screen
         MainUI.SetActive(false); // Disable the main UI elements
+        DiceRollScript.enabled = false; // Disable the DiceRoll script to prevent dice rolling while in settings
     }
 
     public void CloseSettings()
     {
         SettingsUI.SetActive(false); // Hide the settings UI
         MainUI.SetActive(true ); // Display the main game UI
+        DiceRollScript.enabled = true; // Enable the DiceRoll script to allow dice rolling again
     }
 
     public void SetVolume()
