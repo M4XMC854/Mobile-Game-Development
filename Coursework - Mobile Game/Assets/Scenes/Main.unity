@@ -2788,7 +2788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5967,6 +5967,7 @@ GameObject:
   - component: {fileID: 1588811290}
   - component: {fileID: 1588811291}
   - component: {fileID: 1588811292}
+  - component: {fileID: 1588811293}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6006,8 +6007,10 @@ MonoBehaviour:
   VolumeSlider: {fileID: 1439209644}
   HapticFeedback: {fileID: 2044285731}
   SwipeRoll: {fileID: 136867237}
+  SwipeRollEnabled: 0
   AudioMixer: {fileID: 24100000, guid: 78936af754f6fcd4d971a52ba3ece9df, type: 2}
   DiceRollScript: {fileID: 1588811292}
+  SwipeInputScript: {fileID: 1588811293}
 --- !u!114 &1588811292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6023,6 +6026,21 @@ MonoBehaviour:
   Outcomes: 010000000200000003000000040000000500000006000000
   RollSpeed: 2
   DiceDisplay: {fileID: 626716590}
+  SettingsManager: {fileID: 1588811291}
+--- !u!114 &1588811293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588811289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7b5e6103b26176439d6f3e7a059f868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwipeInput
+  settingsManager: {fileID: 1588811291}
+  DiceRoll: {fileID: 1588811292}
 --- !u!1 &1589267433
 GameObject:
   m_ObjectHideFlags: 0

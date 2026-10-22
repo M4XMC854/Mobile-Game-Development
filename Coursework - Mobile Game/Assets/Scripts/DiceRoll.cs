@@ -15,6 +15,8 @@ public class DiceRoll : MonoBehaviour
     public TextMeshProUGUI DiceDisplay; // Reference to the GameObject that displays the dice number
     bool isRolling = false; // Flag to check if the dice is currently rolling
 
+    [SerializeField] SettingsManager SettingsManager; // Reference to the settings manager script
+
     private InputAction InteractAction; // Input action for interacting with the dice
 
     void Awake()
@@ -33,22 +35,25 @@ public class DiceRoll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Touchscreen.current != null)
+        if (SettingsManager.SwipeRollEnabled == false)
         {
-            int TouchID = Touchscreen.current.primaryTouch.touchId.ReadValue(); // Get the finger ID of the primary touch
-            if (EventSystem.current.IsPointerOverGameObject(TouchID)) // Check if the touch is over a UI element
+            if (Touchscreen.current != null)
             {
-                return; // If it is, exit the Update method to prevent rolling the dice
-            }
-            if (InteractAction.WasPressedThisFrame() && !isRolling)
-            {
-                StartCoroutine(RollDice()); // Start the RollDice coroutine when the Interact action is pressed
+                int TouchID = Touchscreen.current.primaryTouch.touchId.ReadValue(); // Get the finger ID of the primary touch
+                if (EventSystem.current.IsPointerOverGameObject(TouchID)) // Check if the touch is over a UI element
+                {
+                    return; // If it is, exit the Update method to prevent rolling the dice
+                }
+                if (InteractAction.WasPressedThisFrame() && !isRolling)
+                {
+                    StartCoroutine(RollDice()); // Start the RollDice coroutine when the Interact action is pressed
+                }
             }
         }
     }
 
 
-    IEnumerator RollDice()
+    public IEnumerator RollDice()
     {
         isRolling = true; // Set the rolling bool to true
 

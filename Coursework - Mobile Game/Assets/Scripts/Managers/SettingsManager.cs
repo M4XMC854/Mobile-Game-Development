@@ -13,9 +13,10 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] GameObject HapticFeedback; // Reference to the haptic feedback toggle
     bool HapticFeedbackEnabled; // Variable to store the state of haptic feedback
     [SerializeField] GameObject SwipeRoll; // Reference to the swipe to roll toggle
-    bool SwipeRollEnabled; // Variable to store the state of swipe to roll
+    public bool SwipeRollEnabled; // Variable to store the state of swipe to roll
     [SerializeField] AudioMixer AudioMixer; // Reference to the audio mixer
     [SerializeField] DiceRoll DiceRollScript; // Reference to the DiceRoll script
+    [SerializeField] SwipeInput SwipeInputScript; // Reference to the swipe input script
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -59,6 +60,7 @@ public class SettingsManager : MonoBehaviour
     public void SetSwipeRoll()
     {
         SwipeRollEnabled = SwipeRoll.GetComponent<UnityEngine.UI.Toggle>().isOn; // Get the state of the swipe to roll toggle
+        SwipeInputScript.UpdateSwipeStatus(); // Update the swipe status in the SwipeInput script
     }
 }
 
