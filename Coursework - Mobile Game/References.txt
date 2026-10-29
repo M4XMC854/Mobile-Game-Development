@@ -5,7 +5,8 @@ Settings Gear Button:
 
 Link - https://freegamesprites.com/en/assets/settings-gear-button
 Name - FreeGameSprites
-Use Type: All assets are CC0 — free for any use.
+Use Type - All assets are CC0 — free for any use.
+Useage - Used for the settings icon in my game
 
 
 
@@ -13,3 +14,21 @@ Expandable and Collapsable UI Tutorial:
 
 Link - https://www.youtube.com/watch?v=CAqm09kQn6M&t=344s
 Name - Indieramus
+Useage - Assisted me in creating an expandable and collapsible UI object
+
+
+
+Cool Hip-Hop Loop:
+
+Link - https://pixabay.com/sound-effects/musical-cool-hip-hop-loop-275527/
+Name - SergeQuadrado
+Use Type - Free for use under the Pixabay Content License
+Useage - Used as a test background music
+
+
+
+Scrolling List tutorial:
+
+Link - https://www.youtube.com/watch?v=zbUVWnq9j20&t=100s
+Name - BMo Dev
+Useage - Assisted me in creating a scrollable UI list to contain upgrade buttons.
