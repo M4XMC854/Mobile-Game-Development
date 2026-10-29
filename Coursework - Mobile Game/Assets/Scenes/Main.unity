@@ -6026,6 +6026,7 @@ MonoBehaviour:
   Outcomes: 010000000200000003000000040000000500000006000000
   RollSpeed: 2
   DiceDisplay: {fileID: 626716590}
+  isRolling: 0
   SettingsManager: {fileID: 1588811291}
 --- !u!114 &1588811293
 MonoBehaviour:

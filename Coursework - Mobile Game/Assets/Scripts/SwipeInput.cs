@@ -30,9 +30,9 @@ public class SwipeInput : MonoBehaviour
 
     void OnSwipe()
     {
-        if (SwipeStatus == true)
+        if (SwipeStatus == true && DiceRoll.isRolling == false)
         {
-            if (Input.touchCount >= 0)
+            if (Input.touchCount > 0)
             {
                 Touch t = Input.GetTouch(0); // Gets primary touch
 

@@ -13,7 +13,7 @@ public class DiceRoll : MonoBehaviour
     int DisplayNum; // Variable to hold the number to display
     int FinalNum; // Variable to hold the final number after rolling
     public TextMeshProUGUI DiceDisplay; // Reference to the GameObject that displays the dice number
-    bool isRolling = false; // Flag to check if the dice is currently rolling
+    public bool isRolling = false; // Flag to check if the dice is currently rolling
 
     [SerializeField] SettingsManager SettingsManager; // Reference to the settings manager script
 
@@ -44,7 +44,7 @@ public class DiceRoll : MonoBehaviour
                 {
                     return; // If it is, exit the Update method to prevent rolling the dice
                 }
-                if (InteractAction.WasPressedThisFrame() && !isRolling)
+                if (InteractAction.WasPressedThisFrame() && isRolling == false)
                 {
                     StartCoroutine(RollDice()); // Start the RollDice coroutine when the Interact action is pressed
                 }
