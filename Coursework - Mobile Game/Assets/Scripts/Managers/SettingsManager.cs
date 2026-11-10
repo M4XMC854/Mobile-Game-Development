@@ -11,17 +11,16 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] GameObject MainUI; // Reference to the main UI
     [SerializeField] GameObject VolumeSlider; // Reference to the volume slider
     [SerializeField] GameObject HapticFeedback; // Reference to the haptic feedback toggle
-    bool HapticFeedbackEnabled; // Variable to store the state of haptic feedback
+    [SerializeField] HapticManager HapticManager; // Reference to the Haptic manager script
     [SerializeField] GameObject SwipeRoll; // Reference to the swipe to roll toggle
     public bool SwipeRollEnabled; // Variable to store the state of swipe to roll
     [SerializeField] AudioMixer AudioMixer; // Reference to the audio mixer
-    [SerializeField] DiceRoll DiceRollScript; // Reference to the DiceRoll script
-    [SerializeField] SwipeInput SwipeInputScript; // Reference to the swipe input script
+    [SerializeField] RollInput RollInputScript; // Reference to the roll input script
+    [SerializeField] GameObject Dice; // Reference to the Dice GameObject
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        HapticFeedbackEnabled = HapticFeedback.GetComponent<UnityEngine.UI.Toggle>().isOn; // Get the state of the haptic feedback toggle
         SwipeRollEnabled = SwipeRoll.GetComponent<UnityEngine.UI.Toggle>().isOn; // Get the state of the swipe to roll toggle   
     }
 
@@ -35,14 +34,16 @@ public class SettingsManager : MonoBehaviour
     {
         SettingsUI.SetActive(true); // Displays the settings UI Screen
         MainUI.SetActive(false); // Disable the main UI elements
-        DiceRollScript.enabled = false; // Disable the DiceRoll script to prevent dice rolling while in settings
+        RollInputScript.enabled = false; // Disable the RollInput script to prevent dice rolling while in settings
+        Dice.SetActive(false); // Disable the Dice GameObject to prevent interaction while in settings
     }
 
     public void CloseSettings()
     {
         SettingsUI.SetActive(false); // Hide the settings UI
         MainUI.SetActive(true ); // Display the main game UI
-        DiceRollScript.enabled = true; // Enable the DiceRoll script to allow dice rolling again
+        RollInputScript.enabled = true; // Enable the RollInput script to allow dice rolling again
+        Dice.SetActive(true); // Enable the Dice GameObject to allow interaction again
     }
 
     public void SetVolume()
@@ -54,13 +55,13 @@ public class SettingsManager : MonoBehaviour
 
     public void SetHapticFeedback()
     {
-        HapticFeedbackEnabled = HapticFeedback.GetComponent<UnityEngine.UI.Toggle>().isOn; // Get the state of the haptic feedback toggle
+        HapticManager.SetHaptics(!HapticManager.HapticsEnabled);
     }
 
     public void SetSwipeRoll()
     {
         SwipeRollEnabled = SwipeRoll.GetComponent<UnityEngine.UI.Toggle>().isOn; // Get the state of the swipe to roll toggle
-        SwipeInputScript.UpdateSwipeStatus(); // Update the swipe status in the SwipeInput script
+        RollInputScript.UpdateSwipeStatus(); // Update the swipe status in the RollInput script
     }
 }
 

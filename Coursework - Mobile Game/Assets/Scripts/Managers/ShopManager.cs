@@ -12,24 +12,30 @@ public class ExpandableShop : MonoBehaviour
     float CanvasHeight; // Stores the height of the canvas
 
     RectTransform RectTransform; 
-    float EndTime;
+    float EndTime; 
     bool IsOpen = false; // Store the state of the UI
+    [SerializeField] GameObject Dice; // Reference to the Dice GameObject
+    [SerializeField] RollManager RollManager; // Reference to the Roll manager script
 
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         CanvasHeight = Canvas.GetComponent<RectTransform>().rect.height; // Get the height of the canvas
         LastKeyFrame();
         RectTransform = GetComponent<RectTransform>();
         CalculatePositions(); // Calculate the starting and ending positions of the shop UI
-        RectTransform.anchoredPosition = StartingPos;
+    }
+
+    private void Start()
+    {
+        RectTransform.anchoredPosition = StartingPos; // Set the shop to its starting position
     }
 
     public void ToggleShop()
     {
-        if (IsOpen == false)
+        if (IsOpen == false && RollManager.isRolling == false)
         {
             StartCoroutine(Open());
         }
@@ -43,6 +49,7 @@ public class ExpandableShop : MonoBehaviour
     {
         float ElapsedTime = 0;
         CalculatePositions(); // Calculate the starting and ending positions of the shop UI
+        Dice.SetActive(false); // Disable the Dice GameObject to prevent interaction while in shop
         while (ElapsedTime < EndTime)
         {
             RectTransform.anchoredPosition = Vector3.Lerp(StartingPos, EndPos, AnimationCurve.Evaluate(ElapsedTime));
@@ -62,6 +69,7 @@ public class ExpandableShop : MonoBehaviour
             yield return new WaitForEndOfFrame();
             ElapsedTime += Time.deltaTime;
         }
+        Dice.SetActive(true); // Enable the Dice GameObject to allow interaction again
         IsOpen = false;
     }
 
