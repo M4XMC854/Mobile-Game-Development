@@ -1505,15 +1505,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 2815665e34f0a724eb36d24eaece31e8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2815665e34f0a724eb36d24eaece31e8, type: 3}
       propertyPath: m_LocalScale.y
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2815665e34f0a724eb36d24eaece31e8, type: 3}
       propertyPath: m_LocalScale.z
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2815665e34f0a724eb36d24eaece31e8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1521,7 +1521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2815665e34f0a724eb36d24eaece31e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -84.16
+      value: -85
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2815665e34f0a724eb36d24eaece31e8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1571,7 +1571,10 @@ PrefabInstance:
       addedObject: {fileID: 423621949}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2815665e34f0a724eb36d24eaece31e8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 423621948}
+      addedObject: {fileID: 423621951}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2815665e34f0a724eb36d24eaece31e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 423621955}
   m_SourcePrefab: {fileID: 100100000, guid: 2815665e34f0a724eb36d24eaece31e8, type: 3}
 --- !u!1 &420219438
 GameObject:
@@ -1652,24 +1655,13 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   Canvas: {fileID: 1104044936}
+  Dice: {fileID: 423621947}
+  RollManager: {fileID: 423621955}
 --- !u!1 &423621947 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2815665e34f0a724eb36d24eaece31e8, type: 3}
   m_PrefabInstance: {fileID: 334770737}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &423621948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 423621947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cebf8d025b4f1d46b1db672def0b0c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PhysicsRecorder
-  RollAnimation: {fileID: 7400000, guid: a6fa28010e982ec4fab2cd5cebcc5752, type: 2}
 --- !u!65 &423621949
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1718,6 +1710,49 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!95 &423621951
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423621947}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 451b96bb8a6a22c4fbd504a11075a219, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 1
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &423621955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423621947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb2e983263a3184390c9feb4f1182a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RollManager
+  Dice: {fileID: 423621947}
+  RollAnimations:
+  - {fileID: 7400000, guid: 60ad76a6e57bc3f458c8e18ec0a79af9, type: 2}
+  - {fileID: 7400000, guid: 22100c6c30d7f11489dbcdb8d60ca9c6, type: 2}
+  - {fileID: 7400000, guid: 1760131e702c4f6448cd2c05a9de6e5a, type: 2}
+  - {fileID: 7400000, guid: 893bce1de6f0af3408532769279ce255, type: 2}
+  - {fileID: 7400000, guid: e50e3e8bd18ca91489bc335ee7c7b8eb, type: 2}
+  - {fileID: 7400000, guid: c48d62ac7f892554e9e2dfb34dfe6fc9, type: 2}
+  isRolling: 0
 --- !u!1 &429343865
 GameObject:
   m_ObjectHideFlags: 0
@@ -2915,7 +2950,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 21, y: 147}
+  m_AnchoredPosition: {x: 21, y: 323}
   m_SizeDelta: {x: 930.317, y: 1124.378}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &626716590
@@ -6132,8 +6167,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1588811290}
   - component: {fileID: 1588811291}
-  - component: {fileID: 1588811292}
   - component: {fileID: 1588811293}
+  - component: {fileID: 1588811294}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6172,28 +6207,12 @@ MonoBehaviour:
   MainUI: {fileID: 1104044936}
   VolumeSlider: {fileID: 1439209644}
   HapticFeedback: {fileID: 2044285731}
+  HapticManager: {fileID: 1588811294}
   SwipeRoll: {fileID: 136867237}
   SwipeRollEnabled: 0
   AudioMixer: {fileID: 24100000, guid: 78936af754f6fcd4d971a52ba3ece9df, type: 2}
-  DiceRollScript: {fileID: 1588811292}
-  SwipeInputScript: {fileID: 1588811293}
---- !u!114 &1588811292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1588811289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 253b3f64bb9e55a4097004460d424125, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DiceRoll
-  Outcomes: 010000000200000003000000040000000500000006000000
-  RollSpeed: 2
-  DiceDisplay: {fileID: 626716590}
-  isRolling: 0
-  SettingsManager: {fileID: 1588811291}
+  RollInputScript: {fileID: 1588811293}
+  Dice: {fileID: 423621947}
 --- !u!114 &1588811293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6207,7 +6226,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwipeInput
   settingsManager: {fileID: 1588811291}
-  DiceRoll: {fileID: 1588811292}
+  RollManager: {fileID: 423621955}
+  HapticManager: {fileID: 1588811294}
+--- !u!114 &1588811294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588811289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e73494a6483e7f4419c686c509903d40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HapticManager
+  HapticsEnabled: 1
 --- !u!1 &1589267433
 GameObject:
   m_ObjectHideFlags: 0

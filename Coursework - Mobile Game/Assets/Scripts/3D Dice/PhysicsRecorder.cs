@@ -7,8 +7,8 @@ public class PhysicsRecorder : MonoBehaviour
 {
     new Transform transform; // Reference to the Transform component of the dice
     Rigidbody rb; // Reference to the Rigidbody component of the dice
-    float min = -5f; // Minimum value for random force and torque applied to the dice
-    float max = 5f; // Maximum value for random force and torque applied to the dice
+    float min = -7.5f; // Minimum value for random force and torque applied to the dice
+    float max = 7.5f; // Maximum value for random force and torque applied to the dice
     float value; // Variable to store the random value generated for force and torque
 
     public AnimationClip RollAnimation; // Reference to the animation clip for rolling the dice
@@ -118,7 +118,7 @@ public class PhysicsRecorder : MonoBehaviour
         WaitForSeconds wait = new WaitForSeconds(0.2f);
         yield return wait;
 
-        rb.AddForce(new Vector3(RandomValue(), 5f, RandomValue()), ForceMode.Impulse);
+        rb.AddForce(new Vector3(RandomValue(), 7.5f, RandomValue()), ForceMode.Impulse);
         rb.AddTorque(new Vector3(RandomValue(), RandomValue(), RandomValue()), ForceMode.Impulse);
 
         yield return new WaitForFixedUpdate(); // Wait for the next physics update before starting the recording
