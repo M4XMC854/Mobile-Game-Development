@@ -1,7 +1,5 @@
-using UnityEditor.Rendering.Universal;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Rendering;
 
 
 public class SettingsManager : MonoBehaviour

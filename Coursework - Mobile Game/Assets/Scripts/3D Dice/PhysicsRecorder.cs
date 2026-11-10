@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using System.Collections;
 using UnityEditor.Animations;
 using UnityEditor;
@@ -129,3 +131,4 @@ public class PhysicsRecorder : MonoBehaviour
     }
 
 }
+#endif
