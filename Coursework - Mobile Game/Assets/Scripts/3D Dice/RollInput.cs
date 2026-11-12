@@ -20,7 +20,7 @@ public class RollInput : MonoBehaviour
 
     void Start()
     {
-        SwipeStatus = settingsManager.SwipeRollEnabled; 
+        SwipeStatus = settingsManager.SwipeRollEnabled;
     }
 
     void Awake()

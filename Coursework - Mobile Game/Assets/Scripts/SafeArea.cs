@@ -6,40 +6,38 @@ public class SafeArea : MonoBehaviour
     RectTransform RectTransform;
     Rect LastSafeArea; 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        RectTransform = GetComponent<RectTransform>(); // Get the RectTransform component of the GameObject this script is attached to
+        RectTransform = GetComponent<RectTransform>(); 
         ApplySafeAre(); 
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (LastSafeArea != Screen.safeArea) // Check if the safe area has changed
+        if (LastSafeArea != Screen.safeArea) 
         {
-            ApplySafeAre(); // Apply the new safe area
+            ApplySafeAre();
         }
     }
 
-
+    // Calculates and applies the safe area for the device
     void ApplySafeAre()
     {
-        Rect SafeArea = Screen.safeArea; // Get the safe area of the screen
+        Rect SafeArea = Screen.safeArea; 
 
-        Vector2 AnchorMin = SafeArea.position; // Get the position of the safe area
-        Vector2 AnchorMax = SafeArea.position + SafeArea.size; // Get the size of the safe area
+        Vector2 AnchorMin = SafeArea.position; 
+        Vector2 AnchorMax = SafeArea.position + SafeArea.size; 
 
-        AnchorMin.x /= Screen.width; // Normalize the x position of the safe area
-        AnchorMin.y /= Screen.height; // Normalize the y position of the safe area
+        AnchorMin.x /= Screen.width; 
+        AnchorMin.y /= Screen.height; 
 
-        AnchorMax.x /= Screen.width; // Normalize the x size of the safe area
-        AnchorMax.y /= Screen.height; // Normalize the y size of the safe area
+        AnchorMax.x /= Screen.width; 
+        AnchorMax.y /= Screen.height; 
 
-        RectTransform.anchorMin = AnchorMin; // Set the anchor min of the RectTransform to the normalized position of the safe area
-        RectTransform.anchorMax = AnchorMax; // Set the anchor max of the RectTransform to the normalized size of the safe area
+        RectTransform.anchorMin = AnchorMin; 
+        RectTransform.anchorMax = AnchorMax; 
 
-        LastSafeArea = SafeArea; // Store the current safe area for future comparison
+        LastSafeArea = SafeArea; 
     }
 
 

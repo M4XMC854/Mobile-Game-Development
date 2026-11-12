@@ -47,9 +47,9 @@ public class RollManager : MonoBehaviour
     // Resets dice position after roll animation. CURRENTLY DOES NOT WORK NEEDS FIXING!!!!!!
     public void ResetDice()
     {
+        isRolling = false;
         Dice.transform.localPosition = StartPos; 
         Dice.transform.localEulerAngles = StartRotation; 
-        isRolling = false; 
     }
 
     IEnumerator WaitToReset(float Duration)

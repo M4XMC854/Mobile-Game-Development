@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class HapticManager : MonoBehaviour
 {
-    public bool HapticsEnabled = true; // Variable to store the state of haptic feedback
+    public bool HapticsEnabled = true;
 
     public void TriggerHaptic()
     {
-        if (HapticsEnabled == false) // If haptics has been disabled do nothing
+        if (HapticsEnabled == false) 
         {
             return;
         }
-        if (HapticsEnabled == true) // If Haptics is turned on trigger a device vibration
+        if (HapticsEnabled == true) 
         {
             Handheld.Vibrate(); 
         }
@@ -20,6 +20,5 @@ public class HapticManager : MonoBehaviour
     {
         HapticsEnabled = Enabled;
     }
-
 
 }
