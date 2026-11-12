@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -6,25 +5,27 @@ using UnityEngine.InputSystem;
 public class RollInput : MonoBehaviour
 {
 
-    [SerializeField] SettingsManager settingsManager; // Reference to the settings manager script
-    [SerializeField] RollManager RollManager; // Reference to the Roll manager script
-    [SerializeField] HapticManager HapticManager; // Reference to the Haptic manager script
-    bool SwipeStatus; // Stores the current status of the swipe to roll setting
+    [SerializeField] SettingsManager settingsManager; 
+    [SerializeField] RollManager RollManager; 
+    [SerializeField] HapticManager HapticManager; 
 
-    float MinSwipeDistance  = 50f; // Minimum distance for a swipe to be recognized
-    Vector2 StartPos; // Start position of the swipe
-    Vector2 EndPos; // End position of the swipe
-    Vector2 Swipe; // Swipe vector
-    private InputAction InteractAction; // Input action for interacting with the dice
+
+    bool SwipeStatus; 
+    float MinSwipeDistance  = 50f; 
+    Vector2 StartPos; 
+    Vector2 EndPos; 
+    Vector2 Swipe; 
+
+    private InputAction InteractAction; 
 
     void Start()
     {
-        SwipeStatus = settingsManager.SwipeRollEnabled; // Initialize the swipe status based on the settings manager
+        SwipeStatus = settingsManager.SwipeRollEnabled; 
     }
 
     void Awake()
     {
-        InteractAction = InputSystem.actions.FindAction("Interact"); // Find the "Interact" action in the Input System
+        InteractAction = InputSystem.actions.FindAction("Interact");
         if (InteractAction == null)
         {
             Debug.LogError("Interact action not found in Input System.");
@@ -39,58 +40,62 @@ public class RollInput : MonoBehaviour
     {
         if (SwipeStatus == true)
         {
-            OnSwipe(); // Call the OnSwipe method if swipe to roll is enabled
+            OnSwipe(); 
         }
         else
         {
-            OnTap(); // Call the OnTap method if swipe to roll is disabled
+            OnTap(); 
         }
     }
 
+    // Is called by settings manager to enable or disable swipe to roll
     public void UpdateSwipeStatus()
     {
-        SwipeStatus = settingsManager.SwipeRollEnabled; // Update the swipe status based on the settings manager
+        SwipeStatus = settingsManager.SwipeRollEnabled; 
     }
 
+
+    // Detect and calculate a swipe and then roll the dice
     void OnSwipe()
     {
         if (SwipeStatus == false || RollManager.isRolling == true)
         {
-            return; // Exit the method if swipe to roll is disabled or if the dice is currently rolling
+            return;
         }
 
         if (Touchscreen.current != null)
         {
             if (Touchscreen.current.primaryTouch.press.isPressed)
             {
-                StartPos = Touchscreen.current.primaryTouch.position.ReadValue(); // Get the start position of the swipe
+                StartPos = Touchscreen.current.primaryTouch.position.ReadValue(); 
             }
             else if (Touchscreen.current.primaryTouch.press.wasReleasedThisFrame)
             {
-                EndPos = Touchscreen.current.primaryTouch.position.ReadValue(); // Get the end position of the swipe
-                Swipe = EndPos - StartPos; // Calculate the swipe vector
-                if (Swipe.magnitude >= MinSwipeDistance) // Check if the swipe distance is greater than or equal to the minimum swipe distance
+                EndPos = Touchscreen.current.primaryTouch.position.ReadValue(); 
+                Swipe = EndPos - StartPos; 
+                if (Swipe.magnitude >= MinSwipeDistance) 
                 {
-                    RollManager.PlayRollAnimation(); // Play the roll animation if a valid swipe is detected
-                    HapticManager.TriggerHaptic(); // Trigger the haptic feedback when the player rolls a dice
+                    RollManager.PlayRollAnimation(); 
+                    HapticManager.TriggerHaptic(); 
                 }
             }
         }
     }
 
+    // Detect a tap and roll the dice
     void OnTap()
     {
         if (SwipeStatus == false)
         {
-            int TouchID = Touchscreen.current.primaryTouch.touchId.ReadValue(); // Get the finger ID of the primary touch
+            int TouchID = Touchscreen.current.primaryTouch.touchId.ReadValue(); 
             if (EventSystem.current.IsPointerOverGameObject(TouchID)) // Check if the touch is over a UI element
             {
-                return; // If it is, exit the Update method to prevent rolling the dice
+                return; 
             }
             if (InteractAction.WasPressedThisFrame() && RollManager.isRolling == false)
             {
-                RollManager.PlayRollAnimation(); // Play the roll animation if a tap is detected
-                HapticManager.TriggerHaptic(); // Trigger the haptic feedback when the player rolls a dice
+                RollManager.PlayRollAnimation(); 
+                HapticManager.TriggerHaptic(); 
             }
          }
     }

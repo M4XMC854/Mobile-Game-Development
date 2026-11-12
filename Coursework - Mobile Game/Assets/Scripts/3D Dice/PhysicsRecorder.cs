@@ -1,4 +1,4 @@
-#if UNITY_EDITOR
+#if UNITY_EDITOR 
 
 using System.Collections;
 using UnityEditor.Animations;
@@ -7,19 +7,19 @@ using UnityEngine;
 
 public class PhysicsRecorder : MonoBehaviour
 {
-    new Transform transform; // Reference to the Transform component of the dice
-    Rigidbody rb; // Reference to the Rigidbody component of the dice
-    float min = -7.5f; // Minimum value for random force and torque applied to the dice
-    float max = 7.5f; // Maximum value for random force and torque applied to the dice
-    float value; // Variable to store the random value generated for force and torque
+    // Dice variables
+    new Transform transform; 
+    Rigidbody rb; 
+    float Min = -7.5f;
+    float Max = 7.5f;
+    float Value; 
 
-    public AnimationClip RollAnimation; // Reference to the animation clip for rolling the dice
-
-    private GameObjectRecorder Recorder; // Recorder to capture the physics state of the dice
-
-    bool isRecording = false; // Flag to indicate if recording is in progress
-    bool hasMoved = false; // Flag to indicate if the dice has moved
-    int SnapshotCount = 0; // Counter to keep track of the number of snapshots taken during recording
+    // Animation variables
+    public AnimationClip RollAnimation; 
+    private GameObjectRecorder Recorder;
+    int SnapshotCount = 0; 
+    bool IsRecording = false; 
+    bool HasMoved = false; 
 
 
 
@@ -31,35 +31,35 @@ public class PhysicsRecorder : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         transform.position = new Vector3(0f, 0f, 0f);
 
-        Recorder = new GameObjectRecorder(gameObject); // Create a new GameObjectRecorder for the dice
-        Recorder.BindComponentsOfType<Transform>(gameObject, true); // Bind the Transform component of the dice to the recorder and include its children
+        // Initalise the recorder and assign it to the dice
+        Recorder = new GameObjectRecorder(gameObject);
+        Recorder.BindComponentsOfType<Transform>(gameObject, true);
     }
 
 
+
+    /* SaveClip() creates a new animation clip,
+     gives it a new name,
+     saves the recorder data to the clip,
+     creates a path to save the clip,
+     saves the clip at the specified path */
     void SaveClip()
     {
-
-        if (Recorder == null || SnapshotCount == 0) // Check if the recorder is empty or if no snapshots were taken during recording
-        { 
-            return; 
-        }
-
-        if (SnapshotCount > 0)
+        if (SnapshotCount > 0 && Recorder != null)
         {
+            
+            AnimationClip clip = new AnimationClip(); 
+            clip.name = "DiceRoll"; 
 
-            AnimationClip clip = new AnimationClip(); // Create a new animation clip to store the recorded physics state of the dice
-            clip.name = "DiceRoll"; // Set the name of the animation clip to "DiceRoll"
-
-            // Save the recorded session to the clip.
             Recorder.SaveToClip(clip);
 
-            string path = AssetDatabase.GenerateUniqueAssetPath("Assets/Animations/Dice/DiceRoll.anim"); // Generate a unique asset path for the new animation clip
+            string path = AssetDatabase.GenerateUniqueAssetPath("Assets/Animations/Dice/DiceRoll.anim"); 
 
-            AssetDatabase.CreateAsset(clip, path); // Create the new animation asset
-            AssetDatabase.SaveAssets(); // Save the changes to the asset database
-            AssetDatabase.Refresh(); // Refresh the asset database to reflect the changes made
+            AssetDatabase.CreateAsset(clip, path); 
+            AssetDatabase.SaveAssets(); 
+            AssetDatabase.Refresh(); 
 
-            Debug.Log("Saved Animation Clip to: " + path); // Log the path of the saved animation clip
+            Debug.Log("Saved Animation Clip to: " + path); 
         }
     }
 
@@ -69,19 +69,19 @@ public class PhysicsRecorder : MonoBehaviour
     void Update()
     {
 
-        if (rb.linearVelocity == Vector3.zero && rb.angularVelocity == Vector3.zero && hasMoved == true)
+        if (rb.linearVelocity == Vector3.zero && rb.angularVelocity == Vector3.zero && HasMoved == true)
         {
-            isRecording = false; // Stop the recording of the dice, The dice roll is over.
-            SaveClip(); // Save the recorded physics state of the dice to the animation clip
-            hasMoved = false; // Reset the hasMoved flag to false for the next roll
+            IsRecording = false; 
+            SaveClip();
+            HasMoved = false; 
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && isRecording == false)
+        if (Input.GetKeyDown(KeyCode.R) && IsRecording == false)
         {
             transform.position = new Vector3(0f, 0f, 0f);
 
-            rb.linearVelocity = Vector3.zero; // Reset the linear velocity of the Rigidbody to zero
-            rb.angularVelocity = Vector3.zero; // Reset the angular velocity of the Rigidbody to zero
+            rb.linearVelocity = Vector3.zero; 
+            rb.angularVelocity = Vector3.zero; 
 
             if (transform.position.x == 0f && transform.position.y == 0f && transform.position.z == 0f)
             {
@@ -91,13 +91,13 @@ public class PhysicsRecorder : MonoBehaviour
 
     }
 
-
+    // Late Update is being used to record the snapshots of the dice movement at the end of every frame
     private void LateUpdate()
     {
-        if (isRecording == true)
+        if (IsRecording == true)
         {
-            Recorder.TakeSnapshot(Time.deltaTime); // Take a snapshot and record all the bindings values for this frame
-            SnapshotCount++; // Increment the snapshot count to keep track of the number of snapshots taken during recording
+            Recorder.TakeSnapshot(Time.deltaTime); 
+            SnapshotCount++; 
         }
         else
         {
@@ -106,15 +106,16 @@ public class PhysicsRecorder : MonoBehaviour
     }
 
 
+
     float RandomValue()
     {
-        value = Random.Range(min, max);
+        Value = Random.Range(Min, Max);
 
-        return value;
+        return Value;
     }
 
 
-
+    // A coroutine to apply the random force to the dice and begin the animation recording 
     IEnumerator Roll()
     {
         WaitForSeconds wait = new WaitForSeconds(0.2f);
@@ -123,11 +124,11 @@ public class PhysicsRecorder : MonoBehaviour
         rb.AddForce(new Vector3(RandomValue(), 7.5f, RandomValue()), ForceMode.Impulse);
         rb.AddTorque(new Vector3(RandomValue(), RandomValue(), RandomValue()), ForceMode.Impulse);
 
-        yield return new WaitForFixedUpdate(); // Wait for the next physics update before starting the recording
+        yield return new WaitForFixedUpdate(); 
 
-        SnapshotCount = 0; // Reset the snapshot count to zero for the new recording session
-        isRecording = true; // Set the recording flag to true to start recording the physics state of the dice
-        hasMoved = true; // Set the hasMoved flag to true to indicate that the dice has moved
+        SnapshotCount = 0; 
+        IsRecording = true; 
+        HasMoved = true; 
     }
 
 }
