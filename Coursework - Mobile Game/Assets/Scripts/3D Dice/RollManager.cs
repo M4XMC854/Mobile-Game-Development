@@ -7,12 +7,11 @@ using UnityEngine;
 
 public class RollManager : MonoBehaviour
 {
-
+    [SerializeField] private RollOutcome RollOutcome;
     [SerializeField] GameObject Dice; 
-    [SerializeField] AnimationClip[] RollAnimations; 
+    [SerializeField] AnimationClip[] RollAnimations;
     Vector3 StartPos = new Vector3(0, -85, 0); 
     Vector3 StartRotation = new Vector3(270, 0, 0); 
-    int Outcome; 
     public bool isRolling = false; 
 
     private void Awake()
@@ -27,14 +26,14 @@ public class RollManager : MonoBehaviour
     // This function generates a predetermined outcome and then displays the roll animation based off that outcome
     public void PlayRollAnimation()
     {
-        isRolling = true; 
-        Outcome = Random.Range(1, 7); 
-        if (Outcome < 1 || Outcome > RollAnimations.Length)
+        isRolling = true;
+        RollOutcome.DetermineOutcome();
+        if (RollOutcome.Outcome < 1 || RollOutcome.Outcome > RollAnimations.Length)
         {
-            Debug.LogError("Invalid outcome: " + Outcome);
+            Debug.LogError("Invalid outcome: " + RollOutcome.Outcome);
             return;
         }
-        AnimationClip SelectedAnimation = RollAnimations[Outcome - 1]; 
+        AnimationClip SelectedAnimation = RollAnimations[RollOutcome.Outcome - 1]; 
         Animator DiceAnimator = Dice.GetComponent<Animator>(); 
 
         Dice.GetComponent<Animator>().enabled = true; 

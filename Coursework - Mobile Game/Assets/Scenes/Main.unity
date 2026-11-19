@@ -1747,6 +1747,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb2e983263a3184390c9feb4f1182a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RollManager
+  RollOutcome:
+    Outcome: 0
   Dice: {fileID: 423621947}
   RollAnimations:
   - {fileID: 7400000, guid: 60ad76a6e57bc3f458c8e18ec0a79af9, type: 2}
