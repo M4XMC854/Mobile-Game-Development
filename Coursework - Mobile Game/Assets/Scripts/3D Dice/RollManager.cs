@@ -8,8 +8,9 @@ using UnityEngine;
 public class RollManager : MonoBehaviour
 {
     [SerializeField] private RollOutcome RollOutcome;
-    [SerializeField] GameObject Dice; 
+    [SerializeField] GameObject Dice;
     [SerializeField] AnimationClip[] RollAnimations;
+    [SerializeField] DotsManager DotsManager;
     Vector3 StartPos = new Vector3(0, -85, 0); 
     Vector3 StartRotation = new Vector3(270, 0, 0); 
     public bool isRolling = false; 
@@ -37,7 +38,9 @@ public class RollManager : MonoBehaviour
         Animator DiceAnimator = Dice.GetComponent<Animator>(); 
 
         Dice.GetComponent<Animator>().enabled = true; 
-        DiceAnimator.Play(SelectedAnimation.name, 0, 0f); 
+        DiceAnimator.Play(SelectedAnimation.name, 0, 0f);
+
+        DotsManager.CalculateDots(RollOutcome.Outcome);
 
         StartCoroutine(WaitToReset(SelectedAnimation.length));
     }
@@ -53,7 +56,8 @@ public class RollManager : MonoBehaviour
 
     IEnumerator WaitToReset(float Duration)
     {
-        yield return new WaitForSeconds(Duration + 0.3f); 
+        yield return new WaitForSeconds(Duration + 0.3f);
+        DotsManager.DisplayDots();
         ResetDice(); 
     }
 }
